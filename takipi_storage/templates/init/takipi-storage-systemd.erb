@@ -1,0 +1,12 @@
+[Unit]
+Description=Overops Takipi Storage daemon
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=<%= @username %>
+ExecStart=<%= @java_path %> -jar  <%= @app_path %> server <%= @setting_path %>
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
