@@ -1,0 +1,33 @@
+folderPath: <%= @storage_path %>
+maxUsedStoragePercentage: <%= @max_used_storage_percentage %>
+enableCors: true
+corsOrigins: "*"
+retentionPeriodDays: <%= @retention_period_days %>
+cleanupJobEnabled: <%= @cleanup_job_enabled %>
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: <%= @log_path %>/access.log
+        archivedLogFilenamePattern: <%= @log_path %>/access.%d.log.gz
+        archivedFileCount: 14
+        
+jobs:
+  cleanup: <%= @cleanup_interval %>
+  
+logging:
+  level: INFO
+  loggers:
+    com.takipi: DEBUG
+  appenders:
+    - type: file
+      currentLogFilename: <%= @log_path %>/takipi-storage.log
+      archivedLogFilenamePattern: <%= @log_path %>/takipi-storage.%d.log.gz
+      archivedFileCount: 14
