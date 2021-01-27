@@ -12,7 +12,7 @@ takipi_properties_file = ::File.join("/", "opt", "takipi", "takipi.properties")
 
 if node["takipi"]["use_fpm"] == "true"
   case node["platform_family"]
-    when "debian"
+    when "debian", "ubuntu"
       apt_repository "takipi" do
         uri "https://s3.amazonaws.com/takipi-deb-repo"
         distribution "stable"
